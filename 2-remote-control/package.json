@@ -5,12 +5,18 @@
   "main": "app/main/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "concurrently \" npm run start:render\" \" wait-on http://localhost:3000 && npm run start:main\"",
     "start:main": "electron .",
-    "start:renderer": "cd app/renderer/src/react-web && npm start"
+    "start:render": "cd app/renderer/src/react-web && npm start"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^8.5.5"
+    "concurrently": "^7.0.0",
+    "electron": "^8.5.5",
+    "wait-on": "^6.0.1"
+  },
+  "dependencies": {
+    "electron-is-dev": "^2.0.0"
   }
 }
