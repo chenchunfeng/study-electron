@@ -1,28 +1,13 @@
-const { app, BrowserWindow, ipcMain } = require('electron');
-const isDev = require('electron-is-dev');
-const path = require('path');
+const { app } = require('electron');
 
-let win;
+const handleIPC = require('./ipc')
+const {create: createMainWindow} = require('./windows/main.js')
+// const { create: createMainWindow } = require('./windows/control.js');
 
-// app.allowRendererProcessReuse = true;
+
 app.on('ready', () => {
-  win = new BrowserWindow({
-    width: 800,
-    height: 600,
-    webPreferences: {
-      nodeIntegration: true,
-      // contextIsolation: false,
-    }
-  })
-
-  if (isDev)  {
-    win.webContents.openDevTools();
-    win.loadURL('http://localhost:3000');
-  } else {
-    // 加载打包好的前端项目
-    win.loadFile(path.resolve(__dirname, '../../renderer/pages/main/index.html'))
-  }
-  ipcMain.on('hello', (e, remote) => {
-    console.log('hello');
-  })
-})
+  handleIPC();
+  createMainWindow();
+  // 主进程监听控制端键鼠操作
+  require('./robot.js')();  
+})                                                  

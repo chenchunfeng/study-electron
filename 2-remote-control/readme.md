@@ -92,3 +92,66 @@
   ```javascript
     "start": "concurrently \"npm run start:render\" \"wait-on http://localhost:3000 && npm run start:main\" ",
   ```
+
+### 回顾ipc
+ipc inter-process communication  进程间通信
+rpc remote procedure call 远程程序调用
+
+• 渲染进程请求+主进程响应（获取自己的控制码） ipcRenderer.invoke + ipcMain.handle 
+• 主进程推送（告知状态），webContents.send，ipcRenderer.on 
+• 渲染进程发起请求（申请控制），ipcRenderer.send，ipcMain.on
+
+需求梳理
+
+1. login 生成自己的连接码
+2. 监听状态 0 未连接 1 控制别人  2 被控制
+3. 输入别人的状态码，后端校验，响应状态监听，弹出新窗口。
+
+
+> Fragments的短语法，其不占用dom节点，https://zh-hans.reactjs.org/docs/fragments.html#gatsby-focus-wrapper   <></>
+> 微信小程序也有一个block标签
+
+
+### 傀儡端实现：捕获桌面视频流
+```javascript
+// 例子：捕获音视频媒体流
+let promise = navigator.mediaDevices.getUserMedia({ 
+    audio: true,  
+    video: { 
+        width: { min: 1024, ideal: 1280, max: 1920 }, 
+        height: { min: 576, ideal: 720, max: 1080 }, 
+        frameRate: { max: 30 } 
+    } 
+})
+
+// 如何播放媒体流对象
+promise.then(stream => {
+  var video = document.querySelector('video') 
+  video.srcObject = stream 
+  video.onloadedmetadata = function(e) { 
+      video.play(); 
+  }
+})
+
+```
+
+### 控制端 键盘鼠标事件监听
+
+1. html 监听控制端的操作。
+2. 传到主进程，主进程使用robot.js在傀儡端执行指令。
+
+使用安装
+- robotjs 执行键盘鼠标指令
+  - 先使用管理员权限的power shell 安装npm install --global --production windows-build-tools
+  - 如果不成功能，手动安装 windows-build-tools目录下的python各vs tools
+  - npm install -g node-gyp@7 p(要安装7.x版本的，这个版本的python才能用2.x的)
+  - npm install
+  - node-gyp rebuild 如果电脑有其它版本的 加 --python C:\Python27\python.exe
+  - npx electron-rebuild
+  - 搞了我三天的时候上面的可忽略，还是得靠npm安装 cnpm有问题
+    -  npm install -g windows-build-tools 这里安装c++ 和python
+    -  npm install -g node-gyp v8.4.1
+    -  npm install robotjs -S
+  
+- vkey     keyCode 转 keyName
+- electron-rebuild 根据当前环境编译robotjs  npx electron-rebuild
