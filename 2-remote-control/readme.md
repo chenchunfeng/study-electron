@@ -153,5 +153,11 @@ promise.then(stream => {
     -  npm install -g node-gyp v8.4.1
     -  npm install robotjs -S
   
-- vkey     keyCode 转 keyName
+- vkey    robotjs使用的是keyName，keyCode 转 keyName
 - electron-rebuild 根据当前环境编译robotjs  npx electron-rebuild
+  - electron-rebuild 报错，通过添加rebuild指令 构建成功
+  ```shell
+    npm rebuild —runtime=electron —disturl=https://atom.io/download/atom-shell —target=<electron版本>  —abi=<对应版本abi>  
+  ```
+    • process.versions.electron，可以看到electron版本 
+    • process.versions.node 可以看到 node 版本，之后再 [abi_crosswalk](https://github.com/mapbox/node-pre-gyp/blob/master/lib/util/abi_crosswalk.json) 查找 abi 

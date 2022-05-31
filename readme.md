@@ -8,6 +8,7 @@
 
 
 >  set "ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron" && npm install
+>  有些版本淘宝镜像是没有的
 
 
 ### Notification actions closeButtonText macOs特有
