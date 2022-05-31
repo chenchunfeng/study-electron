@@ -1,0 +1,14 @@
+{
+  "name": "electorn",
+  "version": "1.0.0",
+  "description": "1. [Electron](https://github.com/coreybutler/nvm-windows/releases) 下载nvm-setup.zip 2. 安装node npm 3. npm install --arch=ia32 --platform=win32 electron  指定32位平台开发 4. 验证是安装成功   - npx electron -v    - ./node_modules/.bin/electron -v",
+  "main": "main.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
+  },
+  "author": "",
+  "license": "ISC"
+}
