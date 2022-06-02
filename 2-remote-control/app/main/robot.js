@@ -27,7 +27,6 @@ function handleKey(data) {
 
 module.exports = function() {
     ipcMain.on('robot', (e, type, data) => {
-        debugger
         console.log('handle', type, data)
         if(type === 'mouse') {
             handleMouse(data);

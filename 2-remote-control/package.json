@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "concurrently \" npm run start:render\" \" wait-on http://localhost:3000 && npm run start:main\"",
+    "start:dev": "concurrently \" npm run start:render\" \" wait-on http://localhost:3000 && npm run start:main:dev\"",
     "start:main": "electron .",
+    "start:main:dev": "electron --inspect-brk . ",
     "start:render": "cd app/renderer/src/react-web && npm start",
     "rebuild": "npm rebuild --runtime=electron --disturl=https://atom.io/download/atom-shell --abi=93 --target=8.5.5 "
   },
@@ -21,6 +23,7 @@
   "dependencies": {
     "electron-is-dev": "^2.0.0",
     "robotjs": "^0.6.0",
-    "vkey": "^1.0.1"
+    "vkey": "^1.0.1",
+    "ws": "^7.2.1"
   }
 }

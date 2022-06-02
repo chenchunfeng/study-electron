@@ -2,6 +2,10 @@ import { useState, useEffect } from 'react';
 import './App.css';
 import { ipcRenderer } from 'electron';
 // const { ipcRenderer } = window.require ? window.require("electron") : {};
+
+// 傀儡端代码
+import './peer-puppet';
+
 function App() {
   const [localCode, setLocalCode] = useState('');
   const [remoteCode, setRemoteCode] = useState('');

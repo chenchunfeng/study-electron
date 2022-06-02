@@ -1,8 +1,7 @@
 const { app } = require('electron');
 
-const handleIPC = require('./ipc')
-const {create: createMainWindow} = require('./windows/main.js')
-// const { create: createMainWindow } = require('./windows/control.js');
+const handleIPC = require('./ipc');
+const {create: createMainWindow} = require('./windows/main.js');
 
 
 app.on('ready', () => {
